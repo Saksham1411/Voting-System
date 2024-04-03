@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
 import error from '../assets/error.svg'
+import { Link } from 'react-router-dom'
 
 function Error() {
     return (
