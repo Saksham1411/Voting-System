@@ -5,7 +5,6 @@ import Home from './components/Home'
 import Error from './components/Error'
 
 
-
 function App() {
   return (
     <BrowserRouter>
