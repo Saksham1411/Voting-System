@@ -22,7 +22,7 @@ function Home() {
                     }}
                     className="relative w-full px-20 gap-4 items-center justify-center"
                 >
-                    <div className=" bg-white-600/10 backdrop-blur-lg  px-5 py-8 flex flex-col justify-center align-items-center text-lg rounded-3xl border border-white/70 shadow-md shadow-white/40">
+                    <div className="bg-white/10 backdrop-blur-lg  px-5 py-8 flex flex-col justify-center align-items-center text-lg rounded-3xl border border-white/70 shadow-md shadow-white/40">
                         {/* Brand & Login */}
                         <div className='flex gap-10 my-5 mx-5 justify-between items-center'>
                             <h1 className='text-4xl pl-2 font-poppins tracking-widest text-white/90 font-medium'>SUFF <span className='tracking-normal font-medium font-fredoka'>O.O</span> RAGE</h1>
