@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from "framer-motion"
 import { AuroraBackground } from "./ui/aurora-background";
+// import { avatar } from "../assets/input-fields-icons/avatar.svg"
 
 function Registration() {
     return (
@@ -18,10 +19,11 @@ function Registration() {
                 <div className='w-1/3 h-fit bg-white/10 backdrop-blur-lg  px-5 py-8 flex flex-col justify-center items-center text-center text-lg rounded-3xl border border-white/70 shadow-md shadow-white/40'>
                     <h1 className='my-2 font-fredoka text-2xl tracking-widest font-medium text-white/90'>REGISTRATION</h1>
                     <p className="mb-5 w-32 ring-1 ring-white/80 bg-white rounded-full"></p>
-                    <input className='w-4/5 my-3 px-5 py-3 rounded-lg font-normal text-base text-white bg-transparent ring-1 ring-white/80 focus:outline-none' placeholder='Full name' type="text" required />
+                    <input className='field' placeholder='Full name' type="text" required />
+
                     <input className='w-4/5 my-3 px-5 py-3 rounded-lg font-normal text-base text-white focus:text-white bg-transparent ring-1 ring-white/80 focus:outline-none ' placeholder='Date of Birth' type="date" id="dateInput" name="date" required />
-                    <input className='w-4/5 my-3 px-5 py-3 rounded-lg font-normal text-base text-white bg-transparent ring-1 ring-white/80 focus:outline-none appearance-none' placeholder='Phone Number' type="number" maxLength="10" required />
-                    <input className='w-4/5 my-3 px-5 py-3 rounded-lg font-normal text-base text-white bg-transparent ring-1 ring-white/80 focus:outline-none' placeholder='Aadhar Number' type="text" required />
+                    <input className='field appearance-none' placeholder='Phone Number' type="number" maxLength="10" required />
+                    <input className='field' placeholder='Aadhar Number' type="text" required />
                     <input className='w-4/5 my-3 px-5 py-3 rounded-lg font-normal text-base text-white bg-transparent ring-1 ring-white/80 focus:outline-none' placeholder='Password' type="password" required />
                     <select required name="country" className="text-white/60 form-control w-4/5 my-3 px-5 py-3 rounded-lg font-normal text-base bg-transparent ring-1 ring-white/80 focus:outline-none" id="country">
                         <option value="0" label="Country" selected="selected">Country ... </option>

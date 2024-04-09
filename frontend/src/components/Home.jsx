@@ -6,7 +6,6 @@ import facebook from '../assets/social-icons/facebook.svg'
 import twitter from '../assets/social-icons/twitter.svg'
 import telegram from '../assets/social-icons/telegram.svg'
 import ballot from '../assets/ballot.svg'
-import vote from '../assets/vote.svg'
 
 function Home() {
     return (
@@ -33,14 +32,14 @@ function Home() {
                         {/* Hero Section */}
                         <div className='flex flex-row pt-10 text-white/80 font-fredoka'>
                             <div className='w-2/3 flex flex-col mx-10'>
-                                <p className='my-4'>This is your <span className='mx-2 text-xl font-medium tracking-widest'>RIGHT TO VOTE</span></p>
+                                <p className='my-4'>This is your <span className='mx-2 text-xl font-medium tracking-widest'>Right to Vote</span></p>
                                 <p className='tracking-wide font-thin mb-6'>Polling made easy for all types of events. Live Polling and managing predictable outcomes.</p>
                                 <Link className='w-fit px-8 py-2  rounded-lg ring-1 ring-white/80 text-white hover:font-medium hover:ring-1 hover:bg-clip-text 
                              font-fredoka  tracking-widest ' to="/register">Get Started</Link>
                             </div>
                             <div className='w-full flex relative translate-x-10'>
-                                <img className='w-36  translate-x-24 absolute opacity-80' src={vote} alt="graph" />
-                                <img className='w-72 absolute -translate-y-8 translate-x-56 rounded-xl opacity-80' src={ballot} alt="voting ballot" />
+                                {/* <img className='w-36  translate-x-24 absolute opacity-80' src={vote} alt="graph" /> */}
+                                <img className='w-72 absolute -translate-y-8 translate-x-40 rounded-xl opacity-80' src={ballot} alt="voting ballot" />
                             </div>
                         </div>
 
