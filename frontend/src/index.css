@@ -11,6 +11,6 @@
     }
 }
 
-.field {
-    @apply w-4/5 my-3 px-5 py-3 rounded-lg font-normal text-base text-white bg-transparent ring-1 ring-white/80 focus:outline-none;
+.field-div {
+    @apply w-4/5 my-2 px-2 py-1 rounded-lg font-normal text-base text-white bg-transparent ring-1 ring-white/80 focus:outline-none flex items-center;
 }

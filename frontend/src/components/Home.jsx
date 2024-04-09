@@ -24,9 +24,8 @@ function Home() {
                     <div className="bg-white/10 backdrop-blur-lg  px-5 py-8 flex flex-col justify-center align-items-center text-lg rounded-3xl border border-white/70 shadow-md shadow-white/40">
                         {/* Brand & Login */}
                         <div className='flex gap-10 my-5 mx-5 justify-between items-center'>
-                            <h1 className='text-4xl pl-2 font-poppins tracking-widest text-white/90 font-medium'>SUFF <span className='tracking-normal font-medium font-fredoka'>O.O</span> RAGE</h1>
-                            <Link className='w-fit px-7 py-1  rounded-lg ring-1 ring-white/80 text-white  hover:ring-1 hover:bg-clip-text 
-                             font-fredoka  tracking-widest ' to='/login'>Login</Link>
+                            <h1 className='text-4xl pl-2 font-poppins tracking-widest text-white/90 font-medium'>SUFF <span className='tracking-normal font-medium font-fredoka'>_._</span> RAGE</h1>
+                            <Link className='w-fit px-7 py-1 rounded-md ring-1 ring-white/80 text-white hover:ring-1 font-fredoka animate-pulse transition hover:bg-clip-text hover:scale-105 hover:animate-none' to='/login'>Login</Link>
                         </div>
 
                         {/* Hero Section */}
@@ -34,8 +33,7 @@ function Home() {
                             <div className='w-2/3 flex flex-col mx-10'>
                                 <p className='my-4'>This is your <span className='mx-2 text-xl font-medium tracking-widest'>Right to Vote</span></p>
                                 <p className='tracking-wide font-thin mb-6'>Polling made easy for all types of events. Live Polling and managing predictable outcomes.</p>
-                                <Link className='w-fit px-8 py-2  rounded-lg ring-1 ring-white/80 text-white hover:font-medium hover:ring-1 hover:bg-clip-text 
-                             font-fredoka  tracking-widest ' to="/register">Get Started</Link>
+                                <Link className='w-fit px-8 py-2 rounded-md ring-1 ring-white/80 text-white font-fredoka animate-pulse transition hover:bg-clip-text hover:scale-105 hover:animate-none' to="/register">Get Started</Link>
                             </div>
                             <div className='w-full flex relative translate-x-10'>
                                 {/* <img className='w-36  translate-x-24 absolute opacity-80' src={vote} alt="graph" /> */}
@@ -45,9 +43,9 @@ function Home() {
 
                         {/* Social Media Handles */}
                         <div className='flex mx-10 mt-10 gap-6 opacity-80'>
-                            <img className='cursor-pointer w-10' src={twitter} alt="twitter" />
-                            <img className='cursor-pointer w-10' src={facebook} alt="facebook" />
-                            <img className='cursor-pointer w-12' src={telegram} alt="telegram" />
+                            <img className='cursor-pointer w-10 hover:scale-125 transition ease-in-out' src={twitter} alt="twitter" />
+                            <img className='cursor-pointer w-10 hover:scale-125 transition ease-in-out' src={facebook} alt="facebook" />
+                            <img className='cursor-pointer w-12 hover:scale-125 transition ease-in-out' src={telegram} alt="telegram" />
                         </div>
                     </div>
                 </motion.div>
