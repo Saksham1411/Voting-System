@@ -37,21 +37,21 @@ function Registration() {
                     <p className="mt-1 mb-5 w-32 ring-1 ring-white/80 bg-white rounded-full"></p>
 
                     {/* Name */}
-                    <div className="field-div transition ${typing? active:ease-in active:scale-105 :  }">
+                    <div className="field-div">
                         <img className='w-8 h-8' src={avatar} alt="avatar_svg" />
-                        <input className='py-2 w-full px-2 bg-transparent focus:outline-none' placeholder='Enter your full name' type="text" required />
+                        <input className='py-2 w-full px-2 bg-transparent tracking-wider focus:outline-none' placeholder='Enter your full name' type="text" required />
                     </div>
 
                     {/* DOB */}
                     <div className="field-div">
                         <img className='mx-1 w-6 h-6' src={date} alt="date_svg" />
-                        <input className='px-2 py-2 w-full text-white/80 focus:text-white/80 bg-transparent focus:outline-none ' placeholder='Date of Birth' type="date" id="dateInput" name="date" required />
+                        <input className='px-2 py-2 w-full text-white/80 tracking-wider focus:text-white/80 bg-transparent focus:outline-none ' placeholder='Date of Birth' type="date" id="dateInput" name="date" required />
                     </div>
 
                     {/* Country */}
                     <div className="field-div">
                         <img src={globe} alt="globe_svg" className="w-8 h-8" />
-                        <select required name="country" className="px-2 py-2 w-full text-white/80 focus:text-white bg-transparent focus:outline-none" id="country">
+                        <select required name="country" className="px-2 py-2 w-full tracking-wider text-white/80 focus:text-white bg-transparent focus:outline-none" id="country">
                             <option value="0" label="Country" selected="selected">Country ... </option>
                             <optgroup className='text-black' id="country-optgroup-Africa" label="Africa">
                                 <option value="DZ" label="Algeria">Algeria</option>
@@ -321,26 +321,25 @@ function Registration() {
                     {/* Phone number */}
                     <div className="field-div">
                         <img className='w-8 h-8' src={phone} alt="phone_svg" />
-                        <input className='px-2 py-2 w-full text-white/80 focus:text-white bg-transparent focus:outline-none appearance-none' placeholder='Phone Number' type="number" maxLength="10" required />
+                        <input className='px-2 py-2 w-full text-white/80 tracking-wider focus:text-white bg-transparent focus:outline-none appearance-none' placeholder='Phone Number' type="number" maxLength="10" required />
                     </div>
 
                     {/* Identity */}
                     <div className="field-div">
                         <img className='w-8 h-8' src={identity} alt="identity_svg" />
-                        <input className='px-2 py-2 w-full text-white/80 focus:text-white bg-transparent focus:outline-none' placeholder='Aadhar Number' type="text" required />
+                        <input className='px-2 py-2 w-full text-white/80 tracking-wider focus:text-white bg-transparent focus:outline-none' placeholder='Aadhar Number' type="text" required />
                     </div>
 
                     {/* Password */}
                     <div className="field-div">
                         <img className='w-8 h-8' src={password} alt="password_svg" />
-                        <input className='px-2 py-2 w-full text-white/80 focus:text-white bg-transparent focus:outline-none' placeholder='Password' type="password" required />
+                        <input className='px-2 py-2 w-full text-white/80 tracking-wider focus:text-white bg-transparent focus:outline-none' placeholder='Password' type="password" required />
                     </div>
 
                     {/* Submit */}
                     <p className="my-5 w-[400px] ring-1 ring-white bg-white rounded-lg"></p>
                     <button className="w-4/5 text-clip font-semibold font-sans hover:ring-1 hover:ring-white hover:bg-transparent hover:text-white bg-white rounded-md py-3 px-2 text-center transition-all hover:scale-95" onClick={check} to='/login'>Register</button>
-                    <Link className='mt-4 text-normal text-blue-100 cursor-pointer translate-x-36 ' to='/'>Forgot Password?</Link>
-
+                    <Link className='mt-4 text-normal text-blue-100 cursor-pointer translate-x-28 pl-2' to='/login'>Already have an account</Link>
 
                 </div>
             </motion.div>
