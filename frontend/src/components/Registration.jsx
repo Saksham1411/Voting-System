@@ -339,7 +339,7 @@ function Registration() {
                     {/* Submit */}
                     <p className="my-5 w-[400px] ring-1 ring-white bg-white rounded-lg"></p>
                     <button className="w-4/5 text-clip font-semibold font-sans hover:ring-1 hover:ring-white hover:bg-transparent hover:text-white bg-white rounded-md py-3 px-2 text-center transition-all hover:scale-95" onClick={check} to='/login'>Register</button>
-                    <Link className='mt-4 text-normal text-blue-100 cursor-pointer translate-x-28 pl-2' to='/login'>Already have an account</Link>
+                    <Link className='mt-4 text-normal text-blue-100 cursor-pointer translate-x-28 pl-2 tracking-wider' to='/login'>Already have an account? </Link>
 
                 </div>
             </motion.div>
