@@ -4,35 +4,9 @@ import { AuroraBackground } from "./ui/aurora-background";
 import { Link } from 'react-router-dom';
 import avatar from '../assets/input-fields-icons/avatar.svg'
 import lock from '../assets/input-fields-icons/password.svg'
+import { useForm } from "react-hook-form"
 
 function Login() {
-
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({ name: "", password: "" });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setErrors({ name: "", password: "" });
-
-    if (name.length > 50) {
-      setErrors({ ...errors, name: "Username is too long" })
-      return;
-    }
-
-    if (password.length < 8) {
-      setErrors({ ...errors, password: "Password must be of atleast 8 letters" })
-      return;
-    }
-
-    // Match the data with database
-    // 1 -> if its correct then redirect the user to dashboard
-    // 2 -> if not then lock the account for 1hr after 5 consecutive tries
-    
-    
-    console.log("Form Submitted");
-  }
 
   return (
     <AuroraBackground>
@@ -51,17 +25,14 @@ function Login() {
           <p className="mt-2 mb-5 w-48 ring-1 ring-white/80 bg-white rounded-full"></p>
 
           {/* Name */}
-          <form className='w-full flex flex-col items-center justify-center' onSubmit={handleSubmit}>
+          <form className='w-full flex flex-col items-center justify-center'>
             <div className="field-div transition ${typing? active:ease-in active:scale-105 :  }">
               <img className='w-8 h-8' src={avatar} alt="avatar_svg" />
               <input className='py-2 w-full px-2 bg-transparent tracking-wider focus:outline-none'
                 placeholder='Enter your full name'
                 type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
                 required />
             </div>
-            {errors.name && <div className='-translate-x-36 mb-3 text-sm tracking-wide text-red-400'>* {errors.name}</div>}
 
             {/* Password */}
             <div className="field-div">
@@ -69,11 +40,8 @@ function Login() {
               <input className='px-2 py-2 w-full text-white/80 tracking-wider focus:text-white bg-transparent focus:outline-none'
                 placeholder='Password'
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
                 required />
             </div>
-            {errors.password && <div className='-translate-x-[90px] mb-3 text-sm tracking-wide text-red-400'>* {errors.password}</div>}
 
             {/* Submit */}
             <p className="my-5 w-[400px] ring-1 ring-white bg-white rounded-lg"></p>
@@ -85,7 +53,7 @@ function Login() {
 
         </div>
       </motion.div>
-    </AuroraBackground>
+    </AuroraBackground >
   )
 }
 
