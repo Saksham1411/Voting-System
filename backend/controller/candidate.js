@@ -25,7 +25,9 @@ const updateCandidate = async (req, res) => {
 
 }
 const deleteCandidate = async (req, res) => {
-
+    const { id } = req.params;
+    await Candidate.findOneAndDelete({ _id: id });
+    res.status(StatusCodes.ACCEPTED).send('Deleted');
 }
 const addVote = async (req, res) => {
 
