@@ -5,8 +5,13 @@ import Home from "./components/Home";
 import Error from "./components/Error";
 import { AnimatePresence } from "framer-motion";
 import VotingPage from "./components/VotingPage";
+import axios from "axios";
+
 
 function App() {
+  axios.defaults.baseURL = import.meta.env.VITE_BACKEND;
+  axios.defaults.withCredentials = true;
+
   return (
     <BrowserRouter>
       <AnimatePresence>
