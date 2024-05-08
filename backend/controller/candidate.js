@@ -4,14 +4,14 @@ const { StatusCodes } = require('http-status-codes');
 
 
 const addCandidate = async (req, res) => {
-    const { name, DOB, nationality, partyName, partyLogo } = req.body;
+    const { name, DOB, partyName, partyLogo } = req.body;
 
     if (differenceInYears(Date.now(), DOB) <= 35) {
         return res.status(StatusCodes.BAD_REQUEST).send('candidate age is less than 35');
     }
 
-    const candidate = await Candidate.create({ name, DOB, nationality, partyLogo, partyLogo });
-
+    const candidate = await Candidate.create({ name, DOB, partyName, partyLogo });
+    console.log(candidate);
     res.status(StatusCodes.CREATED).send('candidate added');
 }
 const getAllCandidates = async (req, res) => {

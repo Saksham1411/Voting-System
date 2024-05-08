@@ -17,6 +17,7 @@ const imageUploader = async (req, res) => {
     const file = parser.format(extName, req.file.buffer);
 
     const result = await cloudinary.uploader.upload(file.content);
+    console.log(result.url);
     res.status(StatusCodes.OK).send(result.url);
 }
 
