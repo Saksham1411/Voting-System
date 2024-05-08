@@ -17,7 +17,7 @@ const addCandidate = async (req, res) => {
 const getAllCandidates = async (req, res) => {
 
     const candidates = await Candidate.find({});
-
+    console.log(candidates);
     res.status(StatusCodes.OK).send(candidates);
 
 }

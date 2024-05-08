@@ -8,11 +8,11 @@ export function AuthContextProvider({children}){
     const [user,setUser] = useState();
     useEffect(()=>{
         if(!user){
-            axios.get('/profile').then(({data})=>{
-              setUser(data);
-            }).catch(err=>{
-              setUser(null);
-            })
+            // axios.get('/profile').then(({data})=>{
+            //   setUser(data);
+            // }).catch(err=>{
+            //   setUser(null);
+            // })
         }
     },[])
     return(

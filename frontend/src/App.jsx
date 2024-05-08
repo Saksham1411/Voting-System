@@ -6,7 +6,7 @@ import Error from "./components/Error";
 import { AnimatePresence } from "framer-motion";
 import VotingPage from "./components/VotingPage";
 import axios from "axios";
-import AdminPage from "./components/AdminPage";
+import AdminPage from "./components/Admin/AdminPage";
 
 
 function App() {

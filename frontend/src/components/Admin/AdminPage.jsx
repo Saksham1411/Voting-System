@@ -1,7 +1,8 @@
 import React from "react";
-import { BackgroundBeams } from "./ui/background-beams";
+import { BackgroundBeams } from "../ui/background-beams";
 import { Link, useParams } from "react-router-dom";
 import CandidateForm from "./CandidateForm";
+import CandidateList from "./CandidateList";
 
 const AdminPage = () => {
   const { subpage } = useParams();
@@ -16,7 +17,7 @@ const AdminPage = () => {
           >
             Add Candidate
           </Link>
-          <div></div>
+          <div><CandidateList/></div>
         </div>
       )}
       {subpage==="newcandidate" && <CandidateForm/>}
