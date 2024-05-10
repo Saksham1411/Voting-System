@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.error{
+    color: red;
+}
+
+
 @layer base {
 
     input[type="number"]::-webkit-inner-spin-button,

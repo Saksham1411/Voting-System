@@ -8,19 +8,67 @@ import phone from '../assets/input-fields-icons/phone.svg'
 import identity from '../assets/input-fields-icons/identity.svg'
 import password from '../assets/input-fields-icons/password.svg'
 import globe from '../assets/input-fields-icons/globe.svg'
-import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 function Registration() {
 
-    const formik = useFormik({
-        initialValues: {
-            username: "",
-        },
-    });
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        })
     }
+
+    const validationSchema = yup.object({
+        name: yup.string().required("Name is Mandatory"),
+        dob: yup.date().required("Date of Birth is Mandatory"),
+        country: yup.string().required("Country is Mandatory"),
+        phone: yup.string().matches(/^\d{10}$/, "Phone number must be 10 digits").required("Phone Number is Mandatory"),
+        identity: yup.string().required("Identity is Mandatory"),
+        password: yup.string().required("Password is Mandatory")
+            .min(8, "Password must be atleast 8 characters")
+            .matches(
+                /[!@#$%^&*(),.?":{}|<>]/,
+                "Password must contain at least one symbol"
+            )
+            .matches(/[0-9]/, "Password must contain at least one number")
+            .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+            .matches(/[a-z]/, "Password must contain at least one lowercase letter"),
+        confirmPassword: yup.string()
+            .oneOf([yup.ref("password")], "Passwords must match")
+            .required("Confirm Password is Mandatory")
+    })
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await validationSchema.validate(formData, { abortEarly: false });
+            console.log("Form Submitted", formData);
+            console.log("Registering the user");
+        } catch (error) {
+            const newErrors = {};
+
+            error.inner.forEach((err) => {
+                newErrors[err.path] = err.message;
+            });
+
+            setError(newErrors);
+        }
+    }
+
+    const [error, setError] = useState();
+
+    const [formData, setFormData] = useState({
+        name: "",
+        dob: "",
+        country: "",
+        phone: "",
+        identity: "",
+        password: "",
+        confirmPassword: ""
+    })
+
 
     return (
         <AuroraBackground>
@@ -48,9 +96,9 @@ function Registration() {
                                 placeholder='Enter your full name'
                                 type="text"
                                 id="username"
-                                value={formik.values.username}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -61,10 +109,9 @@ function Registration() {
                                 placeholder='Date of Birth'
                                 type="date"
                                 id="dateInput"
-                                name="birthDate"
-                                value={formik.values.birthDate}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
+                                name="dob"
+                                value={formData.dob}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -74,9 +121,8 @@ function Registration() {
                             <select name="country"
                                 className="px-2 py-2 w-full tracking-wider text-white/80 focus:text-white bg-transparent focus:outline-none"
                                 id="country"
-                                value={formik.values.country}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
+                                value={formData.country}
+                                onChange={handleChange}
                             >
                                 <option value="0" label="Country" selected="selected">Country ... </option>
                                 <optgroup className='text-black' id="country-optgroup-Africa" label="Africa">
@@ -350,9 +396,10 @@ function Registration() {
                             <input className='px-2 py-2 w-full text-white/80 tracking-wider focus:text-white bg-transparent focus:outline-none appearance-none'
                                 placeholder='Phone Number'
                                 type="number"
-                                value={formik.values.phone}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
+                                name="phone"
+                                maxLength={10}
+                                value={formData.phone}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -362,9 +409,10 @@ function Registration() {
                             <input className='px-2 py-2 w-full text-white/80 tracking-wider focus:text-white bg-transparent focus:outline-none'
                                 placeholder='Aadhar Number'
                                 type="text"
-                                value={formik.values.identity}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
+                                name='identity'
+                                maxLength={12}
+                                value={formData.identity}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -374,9 +422,9 @@ function Registration() {
                             <input className='px-2 py-2 w-full text-white/80 tracking-wider focus:text-white bg-transparent focus:outline-none'
                                 placeholder='Password'
                                 type="password"
-                                value={formik.values.password}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -386,16 +434,17 @@ function Registration() {
                             <input className='px-2 py-2 w-full text-white/80 tracking-wider focus:text-white bg-transparent focus:outline-none'
                                 placeholder='Confirm Password'
                                 type="password"
-                                value={formik.values.confirmPassword}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
+                                name="confirmPassword"
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
                             />
                         </div>
 
 
                         {/* Submit */}
                         <p className="my-5 w-[400px] ring-1 ring-white bg-white rounded-lg"></p>
-                        <button className="w-4/5 text-clip font-semibold font-sans hover:ring-1 hover:ring-white hover:bg-transparent hover:text-white bg-white rounded-md py-3 px-2 text-center transition-all hover:scale-95" type='submit'>Register</button>
+                        <button className="w-4/5 text-clip font-semibold font-sans hover:ring-1 hover:ring-white hover:bg-transparent hover:text-white bg-white rounded-md py-3 px-2 text-center transition-all hover:scale-95"
+                            type='submit'>Register</button>
                     </form>
                     <Link className='mt-4 text-normal text-blue-100 cursor-pointer translate-x-28 pl-2 tracking-wider' to='/login'>Already have an account? </Link>
 
