@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import VotingPage from "./components/VotingPage";
 import axios from "axios";
 import AdminPage from "./components/Admin/AdminPage";
+import ResultPage from "./components/ResultPage";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/voting" element={<VotingPage />}></Route>
           <Route path="/admin" element={<AdminPage />}></Route>
           <Route path="/admin/:subpage" element={<AdminPage />}></Route>
+          <Route path="/result" element={<ResultPage />}></Route>
           <Route path="*" element={<Error />}></Route>
         </Routes>
       </AnimatePresence>

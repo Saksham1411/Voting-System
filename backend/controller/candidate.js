@@ -30,14 +30,22 @@ const deleteCandidate = async (req, res) => {
     res.status(StatusCodes.ACCEPTED).send('Deleted');
 }
 const addVote = async (req, res) => {
-    const {candId} = req.body;
+    const { candId } = req.body;
     // const candidate =  await Candidate.find({_id:candId});
     // const NvoteCount = candidate.voteCount+1;
-    await Candidate.findByIdAndUpdate({_id:candId},{ $inc: {voteCount:1}});
+    await Candidate.findByIdAndUpdate({ _id: candId }, { $inc: { voteCount: 1 } });
     res.status(StatusCodes.OK).send('voted');
 }
 const result = async (req, res) => {
+    const candidate = await Candidate.find({});
 
+    const dataset = { partyName: [], voteCount: [] };
+    candidate.forEach(cand=>{
+        dataset.partyName.push(cand.partyName);
+        dataset.voteCount.push(cand.voteCount);
+    })
+
+    res.status(StatusCodes.OK).send(dataset);
 }
 
 module.exports = { addCandidate, getAllCandidates, updateCandidate, deleteCandidate, addVote, result };
