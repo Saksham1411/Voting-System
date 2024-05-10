@@ -26,8 +26,10 @@ const VotingPage = () => {
     getData();
   }, []);
 
-  function voteHandler() {
-    console.log("Voted");
+  async function voteHandler({id}) {
+    // console.log("Voted", id);
+    const res = await axios.patch('/vote',{candId:id});
+    console.log(res.data);
   }
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-neutral-950 text-white">
@@ -41,7 +43,9 @@ const VotingPage = () => {
                   src={cand.partyLogo}
                   className=" h-12 w-12 rounded-full object-cover"
                 />
-                <h1 className="text-xl uppercase">{cand.partyName}</h1>
+                <h1 className="text-xl uppercase font-roboto">
+                  {cand.partyName}
+                </h1>
               </div>
               <AlertDialog className="text-white bg-opacity-100">
                 <AlertDialogTrigger className="border px-6 ">
@@ -63,7 +67,7 @@ const VotingPage = () => {
                     </AlertDialogCancel>
                     <AlertDialogAction
                       className="bg-white text-black rounded hover:bg-white/80"
-                      onClick={voteHandler}
+                      onClick={() => voteHandler({ id: cand._id })}
                     >
                       Continue
                     </AlertDialogAction>
