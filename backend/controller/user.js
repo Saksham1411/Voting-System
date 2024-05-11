@@ -16,6 +16,10 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     const { aadharNumber, password } = req.body;
 
+    if (!aadharNumber || !password) {
+        return res.status(StatusCodes.BAD_REQUEST).send('Fields are empty');
+    }
+
     const user = await User.findOne({ aadharNumber });
     if (!user) return res.status(StatusCodes.UNAUTHORIZED).send('User Not Found');
 

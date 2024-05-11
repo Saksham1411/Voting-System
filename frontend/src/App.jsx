@@ -8,6 +8,7 @@ import VotingPage from "./components/VotingPage";
 import axios from "axios";
 import AdminPage from "./components/Admin/AdminPage";
 import ResultPage from "./components/ResultPage";
+import { Toaster } from "react-hot-toast";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="*" element={<Error />}></Route>
         </Routes>
       </AnimatePresence>
+      <Toaster/>
     </BrowserRouter>
   );
 }

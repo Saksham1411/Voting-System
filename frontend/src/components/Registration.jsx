@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from "framer-motion"
 import { AuroraBackground } from "./ui/aurora-background";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import avatar from '../assets/input-fields-icons/avatar.svg'
 import date from '../assets/input-fields-icons/date.svg'
 import phone from '../assets/input-fields-icons/phone.svg'
@@ -9,6 +9,8 @@ import identity from '../assets/input-fields-icons/identity.svg'
 import password from '../assets/input-fields-icons/password.svg'
 import globe from '../assets/input-fields-icons/globe.svg'
 import * as yup from 'yup';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 function Registration() {
 
@@ -20,12 +22,14 @@ function Registration() {
         })
     }
 
+    const navigate = useNavigate();
+
     const validationSchema = yup.object({
         name: yup.string().required("Name is Mandatory"),
         dob: yup.date().required("Date of Birth is Mandatory"),
         country: yup.string().required("Country is Mandatory"),
         phone: yup.string().matches(/^\d{10}$/, "Phone number must be 10 digits").required("Phone Number is Mandatory"),
-        identity: yup.string().required("Identity is Mandatory"),
+        aadharNumber: yup.string().required("aadharNumber is Mandatory"),
         password: yup.string().required("Password is Mandatory")
             .min(8, "Password must be atleast 8 characters")
             .matches(
@@ -44,15 +48,20 @@ function Registration() {
         e.preventDefault();
         try {
             await validationSchema.validate(formData, { abortEarly: false });
-            console.log("Form Submitted", formData);
-            console.log("Registering the user");
+            // console.log("Form Submitted", formData);
+            const res = await axios.post('/register',formData);
+            toast.success("User registered");
+            navigate('/login');
         } catch (error) {
+            // console.log(error);
             const newErrors = {};
 
             error.inner.forEach((err) => {
                 newErrors[err.path] = err.message;
+                console.log(err.message);
+                toast.error(err.message);
             });
-
+            // console.log(newErrors);
             setError(newErrors);
         }
     }
@@ -64,7 +73,7 @@ function Registration() {
         dob: "",
         country: "",
         phone: "",
-        identity: "",
+        aadharNumber: "",
         password: "",
         confirmPassword: ""
     })
@@ -409,9 +418,9 @@ function Registration() {
                             <input className='px-2 py-2 w-full text-white/80 tracking-wider focus:text-white bg-transparent focus:outline-none'
                                 placeholder='Aadhar Number'
                                 type="text"
-                                name='identity'
+                                name='aadharNumber'
                                 maxLength={12}
-                                value={formData.identity}
+                                value={formData.aadharNumber}
                                 onChange={handleChange}
                             />
                         </div>
