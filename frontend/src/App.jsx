@@ -10,13 +10,12 @@ import AdminPage from "./components/Admin/AdminPage";
 import ResultPage from "./components/ResultPage";
 import { Toaster } from "react-hot-toast";
 
-
 function App() {
   axios.defaults.baseURL = import.meta.env.VITE_BACKEND;
   axios.defaults.withCredentials = true;
 
   return (
-    <BrowserRouter>
+    <>
       <AnimatePresence>
         <Routes>
           <Route path="/" element={<Home />}></Route>
@@ -29,8 +28,8 @@ function App() {
           <Route path="*" element={<Error />}></Route>
         </Routes>
       </AnimatePresence>
-      <Toaster/>
-    </BrowserRouter>
+      <Toaster />
+    </>
   );
 }
 

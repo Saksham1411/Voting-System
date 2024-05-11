@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { BackgroundBeams } from "./ui/background-beams";
 import {
@@ -12,9 +12,15 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { AuthContext } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const VotingPage = () => {
+  const { user } = useContext(AuthContext);
   const [candidates, setCandidates] = useState([]);
+  const navigate = useNavigate();
+
+  if(!user) navigate('/login'); 
 
   useEffect(() => {
     async function getData() {
@@ -26,9 +32,9 @@ const VotingPage = () => {
     getData();
   }, []);
 
-  async function voteHandler({id}) {
+  async function voteHandler({ id }) {
     // console.log("Voted", id);
-    const res = await axios.patch('/vote',{candId:id});
+    const res = await axios.patch("/vote", { candId: id });
     console.log(res.data);
   }
   return (
@@ -37,7 +43,7 @@ const VotingPage = () => {
       <div className="relative z-10">
         {candidates.length > 0 &&
           candidates.map((cand, idx) => (
-            <div key={idx} className="flex justify-between w-80 mb-4">
+            <div key={cand._id} className="flex justify-between w-80 mb-4">
               <div className="flex gap-4 items-center">
                 <img
                   src={cand.partyLogo}

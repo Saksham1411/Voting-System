@@ -21,7 +21,7 @@ const CandidateList = () => {
       {/* <h1 className="">List of candidate</h1> */}
       {candidate.length > 0 &&
         candidate.map((cand) => (
-          <div className="flex gap-12 items-center">
+          <div className="flex gap-12 items-center" key={cand._id}>
             <div className="flex gap-6">
               <img
                 src={cand.partyLogo}
@@ -38,10 +38,10 @@ const CandidateList = () => {
             </div>
             <div className="flex gap-6 text-lg">
               <button onClick={editCandidate}>
-                <i class="fa-solid fa-pencil"></i>
+                <i className="fa-solid fa-pencil"></i>
               </button>
               <button onClick={deleteCandidate}>
-                <i class="fa-solid fa-trash"></i>
+                <i className="fa-solid fa-trash"></i>
               </button>
             </div>
           </div>
