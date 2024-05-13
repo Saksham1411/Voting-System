@@ -28,7 +28,7 @@ const login = async (req, res) => {
 
     const token = jwt.sign({ userId: user._id, name: user.name, role: user.role }, process.env.JWT_SECRET);
 
-    return res.cookie("token", token, { sameSite: 'none', secure: true }).status(201).json({ userId: user._id, name: user.name, role: user.role });
+    return res.cookie("token", token, { sameSite: 'none', secure: true }).status(201).json({ userId: user._id, name: user.name, role: user.role, votingStatus: user.votingStatus });
 }
 
 const profile = async (req, res) => {
@@ -38,7 +38,7 @@ const profile = async (req, res) => {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await User.findOne({ _id: payload.userId });
-    res.status(StatusCodes.OK).json({ userId: user._id, name: user.name, role: user.role,votingStatus:user.votingStatus });
+    res.status(StatusCodes.OK).json({ userId: user._id, name: user.name, role: user.role, votingStatus: user.votingStatus });
 }
 
 const logout = async (req, res) => {

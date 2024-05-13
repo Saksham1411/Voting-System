@@ -3,12 +3,14 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import axios from "axios";
 import { AuthContext } from "@/context/AuthContext";
+import Logout from "./Logout";
+import { Navigate } from "react-router-dom";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ResultPage = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
   const [result, setResult] = useState([]);
   useEffect(() => {
     async function getData() {
@@ -45,7 +47,11 @@ const ResultPage = () => {
     ],
   };
 
+  if(!user) return <Navigate to='/login'/>
+
   return (
+    <>
+    <Logout/>
     <div className="h-screen w-full dark:bg-black bg-black  dark:bg-grid-white/[0.2] bg-grid-white/[0.2] relative flex items-center justify-center">
       {/* Radial gradient for the container to give a faded look */}
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
@@ -54,6 +60,7 @@ const ResultPage = () => {
         <Pie data={data} className="text-xl" />
       </div>
     </div>
+    </>
   );
 };
 

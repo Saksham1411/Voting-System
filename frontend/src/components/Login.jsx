@@ -21,7 +21,8 @@ function Login() {
       const res = await axios.post("/login", { aadharNumber, password });
       const data = await res.data;
       setUser(data);
-      if(user.role==='USER'){
+      if(user.role=='USER' && user.votingStatus===true) navigate('/result');
+      else if(user.role==='USER'){
         navigate('/voting');
       }else{
         navigate('/admin')
@@ -91,9 +92,9 @@ function Login() {
 
           <Link
             className="mt-4 text-normal text-blue-100 cursor-pointer translate-x-18 "
-            to="/"
+            to="/register"
           >
-            Forgot Password?
+            Dont have a account?
           </Link>
         </div>
       </motion.div>
