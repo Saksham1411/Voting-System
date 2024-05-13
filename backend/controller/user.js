@@ -38,7 +38,7 @@ const profile = async (req, res) => {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await User.findOne({ _id: payload.userId });
-    res.status(StatusCodes.OK).json({ userId: user._id, name: user.name, role: user.role });
+    res.status(StatusCodes.OK).json({ userId: user._id, name: user.name, role: user.role,votingStatus:user.votingStatus });
 }
 
 const logout = async (req, res) => {

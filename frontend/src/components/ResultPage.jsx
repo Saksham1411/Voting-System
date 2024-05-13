@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import axios from "axios";
+import { AuthContext } from "@/context/AuthContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ResultPage = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   const [result, setResult] = useState([]);
   useEffect(() => {
     async function getData() {
@@ -48,7 +51,7 @@ const ResultPage = () => {
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       <div className="flex flex-col justify-center items-center gap-12 text-4xl sm:text-7xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 py-8">
         <p>Results</p>
-        <Pie data={data} className="text-xl"/>
+        <Pie data={data} className="text-xl" />
       </div>
     </div>
   );

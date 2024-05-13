@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { BackgroundBeams } from "../ui/background-beams";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import CandidateForm from "./CandidateForm";
 import CandidateList from "./CandidateList";
 import { AuthContext } from "@/context/AuthContext";
@@ -9,7 +9,10 @@ const AdminPage = () => {
   const { subpage } = useParams();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  if(user?.role!="ADMIN") navigate('/login');
+  console.log(user);
+
+  if(!user) return <Navigate to={'/login'}></Navigate>; 
+
   return (
     <div className="h-screen  bg-neutral-950  text-neutral-200 ">
       {subpage === undefined && (

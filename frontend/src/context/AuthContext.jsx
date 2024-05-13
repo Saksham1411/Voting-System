@@ -7,6 +7,7 @@ export const AuthContext = createContext({});
 export function AuthContextProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     if (!user) {
       axios
@@ -18,9 +19,14 @@ export function AuthContextProvider({ children }) {
           setUser(null);
         });
     }
+    else if(user.role === "USER" && user.votingStatus===true){
+      console.log("true");
+      navigate('/result');
+    }  
     else if (user.role === "USER") navigate("/voting");
-    else navigate("/admin");
+    else if(user.role === "ADMIN") navigate("/admin");
   }, [user]);
+  console.log(user);
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       {children}

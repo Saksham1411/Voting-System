@@ -1,6 +1,8 @@
 const Candidate = require('../models/Candidate');
+const User = require('../models/User');
 const { differenceInYears } = require("date-fns");
 const { StatusCodes } = require('http-status-codes');
+const jwt = require('jsonwebtoken');
 
 
 const addCandidate = async (req, res) => {
@@ -17,7 +19,7 @@ const addCandidate = async (req, res) => {
 const getAllCandidates = async (req, res) => {
 
     const candidates = await Candidate.find({});
-    console.log(candidates);
+    // console.log(candidates);
     res.status(StatusCodes.OK).send(candidates);
 
 }
@@ -31,16 +33,23 @@ const deleteCandidate = async (req, res) => {
 }
 const addVote = async (req, res) => {
     const { candId } = req.body;
-    // const candidate =  await Candidate.find({_id:candId});
-    // const NvoteCount = candidate.voteCount+1;
+    const { token } = req.cookies;
+    if (!token) return res.status(StatusCodes.UNAUTHORIZED).send('Not Authorized');
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.findByIdAndUpdate({ _id: payload.userId }, { votingStatus: true });
+    console.log(user);
     await Candidate.findByIdAndUpdate({ _id: candId }, { $inc: { voteCount: 1 } });
-    res.status(StatusCodes.OK).send('voted');
+
+    const newToken = jwt.sign({ userId: user._id, name: user.name, role: user.role, votingStatus: true }, process.env.JWT_SECRET);
+
+    res.cookie("token", newToken, { sameSite: 'none', secure: true }).status(StatusCodes.OK).json({ votingStatus: true });
 }
 const result = async (req, res) => {
     const candidate = await Candidate.find({});
 
     const dataset = { partyName: [], voteCount: [] };
-    candidate.forEach(cand=>{
+    candidate.forEach(cand => {
         dataset.partyName.push(cand.partyName);
         dataset.voteCount.push(cand.voteCount);
     })

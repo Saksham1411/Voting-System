@@ -13,14 +13,15 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { AuthContext } from "@/context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const VotingPage = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [candidates, setCandidates] = useState([]);
   const navigate = useNavigate();
 
-  if(!user) navigate('/login'); 
+  if (!user) return <Navigate to={"/login"}></Navigate>;
 
   useEffect(() => {
     async function getData() {
@@ -34,8 +35,15 @@ const VotingPage = () => {
 
   async function voteHandler({ id }) {
     // console.log("Voted", id);
-    const res = await axios.patch("/vote", { candId: id });
-    console.log(res.data);
+    try {
+      const res = await axios.patch("/vote", { candId: id });
+      const data = await res.data;
+      toast.success("Voted successfully");
+      navigate('/result');
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-neutral-950 text-white">
