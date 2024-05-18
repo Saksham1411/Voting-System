@@ -14,7 +14,11 @@ const CandidateList = () => {
   }, []);
 
   const editCandidate = async()=>{};
-  const deleteCandidate = async()=>{};
+  const deleteCandidate = async(id)=>{
+    await axios.delete(`/candidate/${id}`);
+    const updatedCandidate = candidate.filter(cand=>cand._id!=id);
+    setCandidate(updatedCandidate);
+  };
   
   return (
     <div className="flex flex-col gap-8 my-20">
@@ -40,7 +44,7 @@ const CandidateList = () => {
               <button onClick={editCandidate}>
                 <i className="fa-solid fa-pencil"></i>
               </button>
-              <button onClick={deleteCandidate}>
+              <button onClick={()=>deleteCandidate(cand._id)}>
                 <i className="fa-solid fa-trash"></i>
               </button>
             </div>
