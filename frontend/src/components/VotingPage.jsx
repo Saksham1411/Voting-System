@@ -18,7 +18,7 @@ import toast from "react-hot-toast";
 import Logout from "./Logout";
 
 const VotingPage = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, votingStatus, setVotingStatus } = useContext(AuthContext);
   const [candidates, setCandidates] = useState([]);
   const navigate = useNavigate();
 
@@ -36,14 +36,16 @@ const VotingPage = () => {
 
   async function voteHandler({ id }) {
     // console.log("Voted", id);
-    try {
-      const res = await axios.patch("/vote", { candId: id });
-      const data = await res.data;
-      toast.success("Voted successfully");
-      navigate("/result");
-    } catch (error) {
-      console.log(error);
-    }
+      try {
+        const res = await axios.patch("/vote", { candId: id });
+        const data = await res.data;
+        toast.success("Voted successfully");
+        // navigate("/result");
+        setVotingStatus(true);
+      } catch (error) {
+        console.log(error);
+      }
+    
   }
   return (
     <>
@@ -64,9 +66,16 @@ const VotingPage = () => {
                   </h1>
                 </div>
                 <AlertDialog className="text-white bg-opacity-100">
-                  <AlertDialogTrigger className="border px-6 ">
-                    Vote
-                  </AlertDialogTrigger>
+                  {votingStatus && (
+                    <button className="border px-6 cursor-not-allowed" onClick={()=>toast.error('Already voted')}>
+                      Vote
+                    </button>
+                  )}
+                  {!votingStatus && (
+                    <AlertDialogTrigger className="border px-6 ">
+                      Vote
+                    </AlertDialogTrigger>
+                  )}
                   <AlertDialogContent className="text-white rounded-lg">
                     <AlertDialogHeader>
                       <AlertDialogTitle>
