@@ -45,16 +45,16 @@ const addVote = async (req, res) => {
 
     res.cookie("token", newToken, { sameSite: 'none', secure: true }).status(StatusCodes.OK).json({ votingStatus: true });
 }
-const result = async (req, res) => {
-    const candidate = await Candidate.find({});
+// const result = async (req, res) => {
+//     const candidate = await Candidate.find({});
 
-    const dataset = { partyName: [], voteCount: [] };
-    candidate.forEach(cand => {
-        dataset.partyName.push(cand.partyName);
-        dataset.voteCount.push(cand.voteCount);
-    })
+//     const dataset = { partyName: [], voteCount: [] };
+//     candidate.forEach(cand => {
+//         dataset.partyName.push(cand.partyName);
+//         dataset.voteCount.push(cand.voteCount);
+//     })
 
-    res.status(StatusCodes.OK).send(dataset);
-}
+//     res.status(StatusCodes.OK).send(dataset);
+// }
 
-module.exports = { addCandidate, getAllCandidates, updateCandidate, deleteCandidate, addVote, result };
+module.exports = { addCandidate, getAllCandidates, updateCandidate, deleteCandidate, addVote };

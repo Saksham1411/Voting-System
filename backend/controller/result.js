@@ -11,15 +11,15 @@ const addResult = async (req, res) => {
         dataset.partyName.push(cand.partyName);
         dataset.voteCount.push(cand.voteCount);
     })
-
-    await Result.add({ declareResult: true, partyName: dataset.partyName, voteCount: dataset.voteCount });
+    await Result.deleteMany();
+    await Result.create({ declareResult: true, partyName: dataset.partyName, voteCount: dataset.voteCount });
     res.status(StatusCodes.CREATED).send('successfully added');
 }
 const getResult = async (req, res) => {
     const result = await Result.find({});
-    
-    if(result.declareResult === false){
-        return res.status(StatusCodes.ACCEPTED).send({msg:'Result is not Declared yet'});
+    console.log(result);
+    if(!result[0].declareResult){
+        return res.status(StatusCodes.BAD_REQUEST).send('Result is not Declared yet');
     }
 
     return res.status(StatusCodes.OK).send(result);

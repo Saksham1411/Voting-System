@@ -41,9 +41,9 @@ const CandidateList = () => {
               </div>
             </div>
             <div className="flex gap-6 text-lg">
-              <button onClick={editCandidate}>
+              {/* <button onClick={editCandidate}>
                 <i className="fa-solid fa-pencil"></i>
-              </button>
+              </button> */}
               <button onClick={()=>deleteCandidate(cand._id)}>
                 <i className="fa-solid fa-trash"></i>
               </button>

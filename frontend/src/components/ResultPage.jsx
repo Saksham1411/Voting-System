@@ -11,11 +11,18 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const ResultPage = () => {
   const { user } = useContext(AuthContext);
   // console.log(user);
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState({});
+  const [message, setMessage] = useState("");
   useEffect(() => {
     async function getData() {
-      const res = await axios.get("/result");
-      setResult(res.data);
+      try {
+        const res = await axios.get("/result");
+        setResult(res.data[0]);
+        console.log(result);
+      } catch (error) {
+        setMessage(error.response.data);
+        // console.log(error.response.data);
+      }
     }
     getData();
   }, []);
@@ -47,19 +54,23 @@ const ResultPage = () => {
     ],
   };
 
-  if(!user) return <Navigate to='/login'/>
+  // if(!user) return <Navigate to='/login'/>
 
   return (
     <>
-    <Logout/>
-    <div className="h-screen w-full dark:bg-black bg-black  dark:bg-grid-white/[0.2] bg-grid-white/[0.2] relative flex items-center justify-center">
-      {/* Radial gradient for the container to give a faded look */}
-      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-      <div className="flex flex-col justify-center items-center gap-12 text-4xl sm:text-7xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 py-8">
-        <p>Results</p>
-        <Pie data={data} className="text-xl" />
+      {/* <Logout/> */}
+      <div className="h-screen w-full dark:bg-black bg-black  dark:bg-grid-white/[0.2] bg-grid-white/[0.2] relative flex items-center justify-center">
+        {/* Radial gradient for the container to give a faded look */}
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+        <div className="flex flex-col justify-center items-center gap-12 text-4xl sm:text-7xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 py-8">
+          {message.length==0 ? (
+            <>
+              <p>Results</p>
+              <Pie data={data} className="text-xl" />
+            </>
+          ):<p>{message}</p>}
+        </div>
       </div>
-    </div>
     </>
   );
 };
