@@ -7,6 +7,6 @@ const router = express.Router();
 router.route('/candidate').post(addCandidate).get(getAllCandidates).patch(updateCandidate);
 router.delete('/candidate/:id',deleteCandidate);
 router.patch('/vote', addVote);
-router.get('/result', result);
+// router.get('/result', result);
 
 module.exports = router;

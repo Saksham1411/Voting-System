@@ -8,6 +8,7 @@ const connectDB = require('./config/connectDb');
 const userRoutes = require('./routes/user');
 const candidateRoutes = require('./routes/candidate');
 const imageUploaderRoutes = require('./routes/imageUploader');
+const resultRoutes = require('./routes/result');
 
 const app = express();
 const PORT =  process.env.PORT || 5000;
@@ -23,6 +24,7 @@ app.use(cors({
 app.use(userRoutes);
 app.use(imageUploaderRoutes);
 app.use(candidateRoutes);
+app.use(resultRoutes);
 
 connectDB(process.env.MONGO_URI);
 app.listen(PORT,console.log('workinggg....'));
