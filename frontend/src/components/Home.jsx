@@ -25,7 +25,7 @@ function Home() {
                         {/* Brand & Login */}
                         <div className='flex gap-10 my-5 mx-5 justify-between items-center'>
                             <h1 className='text-4xl pl-2 font-poppins tracking-widest text-white/90 font-medium'>SUFF <span className='tracking-normal font-medium font-fredoka'>_._</span> RAGE</h1>
-                            <Link className='w-fit px-7 py-1 rounded-md ring-1 ring-white/80 text-white hover:ring-1 font-fredoka animate-pulse transition hover:bg-clip-text hover:scale-105 hover:animate-none' to='/login'>Login</Link>
+                            <Link className='w-fit px-7 py-1 rounded-md ring-1 ring-white/80 text-white hover:ring-1 font-fredoka animate-pulse transition hover:bg-clip-text hover:scale-105 hover:animate-none' to='/result'>Get Results</Link>
                         </div>
 
                         {/* Hero Section */}
@@ -48,6 +48,7 @@ function Home() {
                             <img className='cursor-pointer w-12 hover:scale-125 transition ease-in-out' src={telegram} alt="telegram" />
                         </div>
                     </div>
+                    
                 </motion.div>
             </AuroraBackground>
 

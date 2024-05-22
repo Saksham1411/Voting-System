@@ -1,24 +1,35 @@
 import axios from "axios";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader";
 
 const CandidateForm = () => {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [partyName, setPartyName] = useState("");
   const [partyLogo, setPartyLogo] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const uploadPhoto = async (e) => {
-    const files = e.target.files;
-    console.log(files);
-    const reqBody = new FormData();
-    reqBody.append("logo", files[0]);
+    try {
+      setIsLoading(true);
+      const files = e.target.files;
+      console.log(files);
+      const reqBody = new FormData();
+      reqBody.append("logo", files[0]);
 
-    const { data } = await axios.post("/uploadImage", reqBody, {
-      headers: { "Content-type": "multipart/form-data" },
-    });
-    setPartyLogo(data);
+      const { data } = await axios.post("/uploadImage", reqBody, {
+        headers: { "Content-type": "multipart/form-data" },
+      });
+      setPartyLogo(data);
+      toast.success("Image uploaded successfully");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -30,7 +41,7 @@ const CandidateForm = () => {
         partyLogo,
       });
       console.log(res);
-      navigate('/admin');
+      navigate("/admin");
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +84,7 @@ const CandidateForm = () => {
           type="submit"
           className="px-4 py-1 text-lg rounded bg-white/90 text-black"
         >
-          Add Candidate
+          {!isLoading ? "Add Candidate" : <Loader />}
         </button>
       </form>
     </div>

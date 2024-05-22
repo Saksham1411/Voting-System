@@ -24,9 +24,25 @@ function Registration() {
 
     const navigate = useNavigate();
 
+    const isOver18 = (dateOfBirth) => {
+        const today = new Date();
+        const birthDate = new Date(dateOfBirth);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age >= 18;
+      };
+
     const validationSchema = yup.object({
         name: yup.string().required("Name is Mandatory"),
-        dob: yup.date().required("Date of Birth is Mandatory"),
+        dob: yup.date().required("Date of Birth is Mandatory")
+            .max(new Date(), 'Date of birth must be in the past')
+            .test('is-over-18', 'Age must be greater than 18', function(value) {
+                return isOver18(value); 
+              })
+        ,
         country: yup.string().required("Country is Mandatory"),
         phone: yup.string().matches(/^\d{10}$/, "Phone number must be 10 digits").required("Phone Number is Mandatory"),
         aadharNumber: yup.string().required("aadharNumber is Mandatory"),

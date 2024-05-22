@@ -18,8 +18,9 @@ const addResult = async (req, res) => {
 const getResult = async (req, res) => {
     const result = await Result.find({});
     console.log(result);
-    if(!result[0].declareResult){
-        return res.status(StatusCodes.BAD_REQUEST).send('Result is not Declared yet');
+    
+    if(result.length===0 || !result[0].declareResult){
+        return res.status(StatusCodes.BAD_REQUEST).send('Result is not declared yet');
     }
 
     return res.status(StatusCodes.OK).send(result);

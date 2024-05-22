@@ -3,6 +3,7 @@ const User = require('../models/User');
 const { differenceInYears } = require("date-fns");
 const { StatusCodes } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
+const Result = require('../models/Result');
 
 
 const addCandidate = async (req, res) => {
@@ -45,16 +46,11 @@ const addVote = async (req, res) => {
 
     res.cookie("token", newToken, { sameSite: 'none', secure: true }).status(StatusCodes.OK).json({ votingStatus: true });
 }
-// const result = async (req, res) => {
-//     const candidate = await Candidate.find({});
+const reset = async (req, res) => {
+    const candidate = await Candidate.updateMany({},{ voteCount: 0 });
+    await Result.deleteMany({});
+    res.send(candidate);
+}
 
-//     const dataset = { partyName: [], voteCount: [] };
-//     candidate.forEach(cand => {
-//         dataset.partyName.push(cand.partyName);
-//         dataset.voteCount.push(cand.voteCount);
-//     })
 
-//     res.status(StatusCodes.OK).send(dataset);
-// }
-
-module.exports = { addCandidate, getAllCandidates, updateCandidate, deleteCandidate, addVote };
+module.exports = { addCandidate, getAllCandidates, updateCandidate, deleteCandidate, addVote, reset };
